@@ -124,4 +124,42 @@ class VisitorController extends Controller
         }
 
     }
+
+    public function filterByMobile(Request $request)
+    {
+        $mobile_given = request('phone');
+        //$mobile_given= "01717295256";
+        $propertyId = 1;
+        try {
+            $curl = curl_init();
+            $conetent_type ="application/json";
+            $formData = '';
+
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $this->apiUrl."?propertyId=".$propertyId.'&phone='.$mobile_given,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_TIMEOUT => 30000,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_POSTFIELDS => $formData,
+                CURLOPT_HTTPHEADER => array(
+                    // Set Here Your Requesred Headers
+                    'Content-Type: '.$conetent_type,
+                    "Authorization: Bearer ".$this->token,
+                ),
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            print_r(json_decode($response));
+
+        } catch (\Exception $e) {
+            return [
+                'curl_err' => $err,
+                'exception' => $e->getMessage()
+            ];
+        }
+    }
 }
