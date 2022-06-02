@@ -16,7 +16,7 @@ class VisitorController extends Controller
         @return response of data/error
     */
     public function index()
-    {
+    {   //http://127.0.0.1:8000/visitors
         $propertyId = 1;
         $response = $this->curlCall($propertyId, $this->apiUrl, $this->token, "GET");
         print_r(json_decode($response));
@@ -31,6 +31,7 @@ class VisitorController extends Controller
     */
     public function store()
     {
+        //http://127.0.0.1:8000/visitors/store
         $propertyId = 1;
         $data = [
             'propertyId'=> $propertyId,
@@ -52,6 +53,7 @@ class VisitorController extends Controller
     */
     public function update()
     {
+        //http://127.0.0.1:8000/visitors/update
         $propertyId = 1;
         $data = [
             'propertyId'=> $propertyId,
@@ -73,6 +75,7 @@ class VisitorController extends Controller
     */
     public function delete()
     {
+        //http://127.0.0.1:8000/visitors/delete
         $propertyId = 1;
         $data="";
 
@@ -127,6 +130,7 @@ class VisitorController extends Controller
 
     public function filterByMobile(Request $request)
     {
+        //http://127.0.0.1:8000/visitors/filter/01717295256
         $mobile_given = request('phone');
         //$mobile_given= "01717295256";
         $propertyId = 1;
